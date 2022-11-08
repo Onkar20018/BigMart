@@ -7,7 +7,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-model3 = pickle.load(open('model3.pkl','rb'))
+model = pickle.load(open('model.pkl','rb'))
 
 @app.route('/')
 def hello_world():
@@ -36,11 +36,8 @@ def predict():
     for col in cat_col:
         df[col] = le.fit_transform(df[col])
 
-    output = model3.predict(df)
-    # if(output==0):
-    #         output="Patient Does Not Have Risk of Heart Attack"
-    # else:
-    #         output="Patient Has Risk of Heart Attack"
+    output = model.predict(df)
+    
     
             
     return render_template('index.html', prediction_text='The predicted value is {}'.format(output))
